@@ -17,9 +17,9 @@ module Enumerable
 
   def my_select
     arr = []
-    my_each { |value| arr << value if yield(value) }
+    my_each { |value| arr.push(value) if yield(value) }
     arr
   end
 end
 
-[1, 2, 3, 4, 5, 6].my_select { |n| n.even? }
+p [1, 2, 3, 4, 5, 6].my_select { |n| n.even? }
