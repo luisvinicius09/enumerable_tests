@@ -19,6 +19,38 @@ def my_select
   my_each { |value| arr << value if yield value}
  print arr
 end
+def my_all?
+  array = []
+  my_each { |value| array << value unless yield value}
+  if array.empty?
+    return true
+  else
+    return false
+  end
+end
+def my_any?
+  array = []
+  my_each { |value| array << value if yield value}
+  if array.empty?
+    return false
+  else
+    return true
+  end
+end
+def my_none?
+  array = []
+  my_each { |value| array << value if yield value}
+  if array.empty?
+    return true
+  else
+    return false
+  end
+end
+def my_count
+  count = 0
+  my_each { |value| count +=1 if yield value}
+  count
+end
 end
 
-[1, 2, 3, 4, 5, 6].my_select { |n| n.even? }
+puts [ 2, 4, 7, 10, 6, 12].my_count { |n| n % 2 == 0 } 
