@@ -1,7 +1,7 @@
 module Enumerable
   def my_each
     i = 0
-    while i < self.length
+    while i < length
       yield(self[i])
       i += 1
     end
@@ -9,7 +9,7 @@ module Enumerable
 
   def my_each_with_index
     i = 0
-    while i < self.length
+    while i < length
       yield(self[i], i)
       i += 1
     end
@@ -25,9 +25,9 @@ module Enumerable
     array = []
     my_each { |value| array << value unless yield value }
     if array.empty?
-      return true
+      true
     else
-      return false
+      false
     end
   end
 
@@ -35,9 +35,9 @@ module Enumerable
     array = []
     my_each { |value| array << value if yield value }
     if array.empty?
-      return false
+      false
     else
-      return true
+      true
     end
   end
 
@@ -45,9 +45,9 @@ module Enumerable
     array = []
     my_each { |value| array << value if yield value }
     if array.empty?
-      return true
+      true
     else
-      return false
+      false
     end
   end
 
@@ -83,6 +83,3 @@ module Enumerable
     result
   end
 end
-
-my_proc = Proc.new { |n| n.upcase }
-p ["a", "b", "c"].my_map(my_proc)
