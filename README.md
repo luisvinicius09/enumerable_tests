@@ -31,6 +31,7 @@ _cd enumarable_
 
 **Step 3**: Run the program from command line, then open it in a text editor
 
+**Step 4**:  Run _ruby enumerable.rb_ from your terminal To test the code.
 ## Author 1
 
 👤 **Jaim Delmar**
