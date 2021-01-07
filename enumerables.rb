@@ -27,10 +27,10 @@ module Enumerable
       my_each { |value| return false unless value.to_s =~ arg }
     elsif arg.is_a? Class
       my_each { |value| return false unless value.is_a? arg }
-    elsif arg.nil?
-      return false
     elsif arg
       my_each { |value| return false unless value == arg }
+    elsif arg.nil?
+      my_each { |value| return false unless value }
     else
       my_each { |value| return false unless value }
     end
@@ -44,10 +44,10 @@ module Enumerable
       my_each { |value| return true if value.to_s =~ arg }
     elsif arg.is_a? Class
       my_each { |value| return true if value.is_a? arg }
-    elsif arg.nil?
-      return false
     elsif arg
       my_each { |value| return true if value == arg }
+    elsif arg.nil?
+      my_each { |value| return true if value }
     else
       my_each { |value| return true if value }
     end
@@ -61,10 +61,10 @@ module Enumerable
       my_each { |value| return false if value.to_s =~ arg }
     elsif arg.is_a? Class
       my_each { |value| return false if value.is_a? arg }
-    elsif arg.nil?
-      return true
     elsif arg
       my_each { |value| return false if value == arg }
+    elsif arg.nil?
+      my_each { |value| return false if value }
     else
       my_each { |value| return false if value }
     end
