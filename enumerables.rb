@@ -1,9 +1,13 @@
 module Enumerable
   def my_each
-    i = 0
-    while i < length
-      yield(self[i])
-      i += 1
+    if block_given?
+      i = 0
+      while i < length
+        yield(to_a[i])
+        i += 1
+      end
+    else
+      return to_enum
     end
   end
 
@@ -83,3 +87,5 @@ module Enumerable
     result
   end
 end
+
+p %w[a b c d].my_each
