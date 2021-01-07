@@ -33,17 +33,18 @@ module Enumerable
   end
 
   def my_all?(arg = nil)
-    array = []
     if block_given?
-      my_each { |value| array << value unless yield value }
+      my_each { |value| return false unless yield value }
     elsif arg.is_a? Regexp
-      my_each { |value| array << value unless value.to_s =~ arg }
+      my_each { |value| return false unless value.to_s =~ arg }
+    elsif arg.is_a? Class
+      my_each { |value| return false unless value.is_a? arg }
     elsif arg
-      my_each { |value| array << value unless value == arg }
+      my_each { |value| return false unless value == arg }
     else
-      my_each { |value| array << value unless !value || value.nil? }
+      my_each { |value| return false unless !value || value.nil? }
     end
-    array.empty? ? true : false
+    true
   end
 
   def my_any?(arg = nil)
@@ -51,6 +52,8 @@ module Enumerable
       my_each { |value| return true if yield value }
     elsif arg.is_a? Regexp
       my_each { |value| return true if value.to_s =~ arg }
+    elsif arg.is_a? Class
+      my_each { |value| return true if value.is_a? arg }
     elsif arg
       my_each { |value| return true if value == arg }
     else
@@ -64,6 +67,8 @@ module Enumerable
       my_each { |value| return false if yield value }
     elsif arg.is_a? Regexp
       my_each { |value| return false if value.to_s =~ arg }
+    elsif arg.is_a? Class
+      my_each { |value| return false if value.is_a? arg }
     elsif arg
       my_each { |value| return false if value == arg }
     else
@@ -111,10 +116,10 @@ module Enumerable
     end
     result
   end
+end
 
-  def multiply_els(arr)
-    arr.my_inject { |a, b| a * b }
-  end
+def multiply_els(arr)
+  arr.my_inject { |a, b| a * b }
 end
 
 # rubocop:enable Metrics/CyclomaticComplexity
