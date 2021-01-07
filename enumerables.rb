@@ -3,24 +3,12 @@
 
 module Enumerable
   def my_each
-    return to_enum unless block_given?
-
-    i = 0
-    while i < size
-      yield(to_a[i])
-      i += 1
-    end
+    block_given? ? size.times { |i| yield(to_a[i]) } : (return to_enum)
     self
   end
 
   def my_each_with_index
-    return to_enum unless block_given?
-
-    i = 0
-    while i < size
-      yield(to_a[i], i)
-      i += 1
-    end
+    block_given? ? size.times { |i| yield(to_a[i], i) } : (return to_enum)
     self
   end
 
