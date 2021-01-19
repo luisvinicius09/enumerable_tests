@@ -32,6 +32,23 @@ _cd enumarable_
 **Step 3**: Run the program from command line, then open it in a text editor
 
 **Step 4**:  Run _ruby enumerable.rb_ from your terminal To test the code.
+
+## Rspec tests
+
+![Screenshot of testing](capture.png)
+
+For testing make sure you install Rspec:
+
+```
+gem install rspec
+```
+
+Run the rspec command in the project root directory:
+
+```
+rspec
+```
+
 ## Author 1
 
 👤 **Jaim Delmar**
@@ -46,6 +63,13 @@ _cd enumarable_
 - [@Nasa28](https://github.com/Nasa28)
 - [@Ultimate_Nasa](https://twitter.com/Ultimate_Nasa)
 - [LinkedIn](https://www.linkedin.com/in/kalu-chinasa-agu-a15080103/)
+
+## Author 3
+
+👤 **Luis Vinicius**
+
+- [@luisvinicius09](https://github.com/luisvinicius09)
+- [LinkedIn](https://www.linkedin.com/in/luis-vinicius)
 
 ## 🤝 Contributing
 
