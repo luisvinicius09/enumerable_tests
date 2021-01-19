@@ -81,4 +81,56 @@ describe Enumerable do
       expect(arr.my_any?).to be_truthy
     end
   end
+  describe "#my_none?" do
+    it 'return true if the block never returns true for all elements' do
+      expect(arr.my_none?{|el| el == 15}).to be_truthy
+    end
+    it "returns true if any of the element === pattern in the collection" do
+      expect(hash.my_none?(/[7-9]/)).to be_truthy
+    end
+    it "returns false if any of the element === pattern in the collection" do
+      expect(hash.my_none?(/[0-9]/)).to be_falsy
+    end
+    it 'return true only if none of the collection members is true and there is no block' do
+      expect([3, 4, true].my_none?)
+    end
+  end
+  describe "#my_count" do
+    it 'returns the count if an argument is passed' do
+      expect([1, 1, 1].my_count(1)).to eql(3)
+    end
+    it 'returns the count if a block is passed matching the condition of the block' do
+      expect([2, 2, 4, 4, 6, 6].my_count{ |x| x%2==0 }).to eql(6)
+    end
+    it 'returns the count if there is no block or argument' do
+      expect(arr.my_count).to eql(6)
+    end
+  end
+  describe "#my_map" do
+    it 'returns new array with the results of running block once every element in enum' do
+      expect((1..4).map { |i| i*i }).to eql([1, 4, 9, 16])
+    end
+    it 'returns an enumerator if no block is given' do
+      expect((1..4).map.is_a?(Enumerator)).to be_truthy
+    end
+    it 'returns a new array with the values of every element in the hash' do
+      expect(hash.map{|k, v| v}).to eql([1, 2, 3, 4])
+    end
+  end
+  describe '#my_inject' do
+    it 'combines all elements of enum by applying a binary operation' do
+      expect((5..10).my_inject(:+)).to eql(45)
+    end
+    it 'for each element in enum the block is passed an accumulator value and the element' do
+      expect((5..10).my_inject(1) { |product, n| product * n }).to eql(151200)
+    end
+    it 'combines all elements of enum by using a block and inject' do
+      expect((5..10).my_inject { |sum, n| sum + n }).to eql(45)
+    end
+  end
+  describe '#multiply_els' do
+    it 'returns a multiplication on the array' do
+      expect(multiply_els(arr)).to eql(720)
+    end
+  end
 end
